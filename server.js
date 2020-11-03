@@ -6,7 +6,7 @@ app.use(express.urlencoded());
 app.post('/data',function(req,res){
    // make JSON strengify fr Object but it does not work for Now 
    response = {  
-    data:req.body.jsonData  
+    data:req.body.jsonData
      
 };  
 console.log(response,req.body);  
