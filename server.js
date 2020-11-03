@@ -1,16 +1,17 @@
-var http = require('http');
-var url = require('url');
-var fs = require('fs');
-
-fs.writeFile('csvData.txt', 'Hello content!', function (err) {
-  if (err) throw err;
-  //console.log('Saved!');
+var express=require('express');
+var app=express();
+// middleware method 
+app.use(express.json());
+app.use(express.urlencoded());
+app.post('/data',function(req,res){
+   // make JSON strengify fr Object but it does not work for Now 
+   response = {  
+    data:req.body.jsonData  
+     
+};  
+console.log(response,req.body);  
+res.send(JSON.stringify(response));  
 });
-http.createServer(function (req, res) {
-  res.writeHead(200, {'Content-Type': 'text/html'});
-  /*Use the url module to turn the querystring into an object:*/
-  var q = url.parse(req.url, true).query;
-  /*Return the year and month from the query object:*/
-  var txt = q.year + " " + q.month;
-  res.end(txt);
-}).listen(8080);
+app.listen(8080,function(){
+    console.log("server at localhost:8080");
+})
